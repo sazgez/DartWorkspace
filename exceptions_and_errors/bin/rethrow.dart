@@ -1,15 +1,19 @@
 void main(List<String> args) {
-  tryCreatingPerson(age: 20);
-  tryCreatingPerson(age: -1);
-  tryCreatingPerson(age: 141);
+  try {
+    tryCreatingPerson(age: 20);
+    tryCreatingPerson(age: -1);
+    tryCreatingPerson(age: 141);
+  } catch (error, stackTrace) {
+    print(error);
+    print(stackTrace);
+  }
 }
 
 void tryCreatingPerson({int age = 0}) {
   try {
     print(Person(age: age).age);
-  } on InvalidAgeException catch (exception, stackTrace) {
-    print(exception);
-    print(stackTrace);
+  } on InvalidAgeException {
+    rethrow;
   }
   print('----------------------------');
 }
